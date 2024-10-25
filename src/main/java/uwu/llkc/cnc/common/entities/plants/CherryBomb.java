@@ -183,11 +183,17 @@ public class CherryBomb extends CNCPlant implements VibrationSystem, IMultiHeadE
                     isExploding = true;
                 } else if (getOwner() != null) {
                     var mob = getOwner().getLastHurtMob();
-                    if (mob != null && mob.distanceToSqr(this) < 12.25) {
+                    if (mob != null &&
+                            mob.distanceToSqr(this) < 12.25 &&
+                            mob instanceof CNCPlant plant &&
+                            (plant.getOwnerUUID() == null || !plant.getOwnerUUID().equals(getOwnerUUID()))) {
                         isExploding = true;
                     } else {
                         mob = getOwner().getLastHurtByMob();
-                        if (mob != null && mob.distanceToSqr(this) < 12.25) {
+                        if (mob != null &&
+                                mob.distanceToSqr(this) < 12.25 &&
+                                mob instanceof CNCPlant plant &&
+                                (plant.getOwnerUUID() == null || !plant.getOwnerUUID().equals(getOwnerUUID()))) {
                             isExploding = true;
                         }
                     }
