@@ -7,6 +7,7 @@ import net.minecraft.data.worldgen.BootstrapContext;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.tags.BiomeTags;
 import net.minecraft.world.level.biome.Biome;
+import net.minecraft.world.level.biome.Biomes;
 import net.minecraft.world.level.biome.MobSpawnSettings;
 import net.minecraft.world.level.levelgen.GenerationStep;
 import net.neoforged.neoforge.common.world.BiomeModifier;
@@ -20,6 +21,7 @@ public class BiomeModifierInit {
     public static final ResourceKey<BiomeModifier> BROWNCOAT_SPAWNS = ResourceKey.create(NeoForgeRegistries.Keys.BIOME_MODIFIERS, CNCMod.rl("browncoat_spawns"));
     public static final ResourceKey<BiomeModifier> WALL_NUT_SPAWNS = ResourceKey.create(NeoForgeRegistries.Keys.BIOME_MODIFIERS, CNCMod.rl("wall_nut_spawns"));
     public static final ResourceKey<BiomeModifier> IMP_SPAWNS = ResourceKey.create(NeoForgeRegistries.Keys.BIOME_MODIFIERS, CNCMod.rl("imp_spawns"));
+    public static final ResourceKey<BiomeModifier> CHERRY_SPAWNS = ResourceKey.create(NeoForgeRegistries.Keys.BIOME_MODIFIERS, CNCMod.rl("cherry_spawns"));
 
     public static final ResourceKey<BiomeModifier> WALNUT_TREE_PLACEMENT = ResourceKey.create(NeoForgeRegistries.Keys.BIOME_MODIFIERS, CNCMod.rl("walnut_tree_placement"));
 
@@ -44,8 +46,12 @@ public class BiomeModifierInit {
         );
         context.register(IMP_SPAWNS, BiomeModifiers.AddSpawnsBiomeModifier.singleSpawn(
                 biomes.getOrThrow(BiomeTags.IS_OVERWORLD),
-                new MobSpawnSettings.SpawnerData(EntityTypeRegistry.BROWNCOAT.get(), 20, 5, 7))
+                new MobSpawnSettings.SpawnerData(EntityTypeRegistry.IMP.get(), 20, 5, 7))
         );
+        context.register(CHERRY_SPAWNS, BiomeModifiers.AddSpawnsBiomeModifier.singleSpawn(
+                HolderSet.direct(biomes.getOrThrow(Biomes.CHERRY_GROVE)),
+                new MobSpawnSettings.SpawnerData(EntityTypeRegistry.CHERRY_BOMB.get(), 10, 1, 1)
+        ));
         context.register(WALNUT_TREE_PLACEMENT, new BiomeModifiers.AddFeaturesBiomeModifier(
                 HolderSet.direct(biomes.getOrThrow(net.minecraft.world.level.biome.Biomes.FOREST)),
                 HolderSet.direct(context.lookup(Registries.PLACED_FEATURE).getOrThrow(PlacedFeatureInit.WALNUT_TREE)),

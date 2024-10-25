@@ -1,7 +1,8 @@
-// 1.21	2024-10-24T18:22:31.5124369	Registries
+// 1.21	2024-10-25T22:11:58.7091937	Registries
 e24fbce1dfa48aef086aaa0d0ce1fd1f4a6733ae data/cnc/damage_type/pea_shot.json
 a83f12cc29956b4bdf395ca9e02bc52935481b9b data/cnc/neoforge/biome_modifier/browncoat_spawns.json
-1087a589835d8891ce3224ec17cf4b464f79ae4d data/cnc/neoforge/biome_modifier/imp_spawns.json
+c05b970d5e9813442645b46a0049e5ab7a3b2c63 data/cnc/neoforge/biome_modifier/cherry_spawns.json
+738c82c5b39e3ba9f92e084671322fdbdc9c530b data/cnc/neoforge/biome_modifier/imp_spawns.json
 d1d5c47ae78f4256fca64c6ca375ec6ce2043d94 data/cnc/neoforge/biome_modifier/peashooter_spawns.json
 38f81929cf6d0a92af928ee6225bf1d8ba906808 data/cnc/neoforge/biome_modifier/sunflower_spawns.json
 7638de5361cfdb6378bf5cdcfbdfde828d580cfb data/cnc/neoforge/biome_modifier/wall_nut_spawns.json

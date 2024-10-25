@@ -18,18 +18,19 @@ import net.minecraft.world.item.Items;
 import net.minecraft.world.item.trading.ItemCost;
 import net.minecraft.world.item.trading.MerchantOffer;
 import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
-import net.neoforged.neoforge.event.VanillaGameEvent;
 import net.neoforged.neoforge.event.entity.living.LivingDamageEvent;
 import net.neoforged.neoforge.event.entity.living.LivingDeathEvent;
 import net.neoforged.neoforge.event.entity.living.LivingEquipmentChangeEvent;
 import net.neoforged.neoforge.event.entity.player.PlayerInteractEvent;
 import net.neoforged.neoforge.event.entity.player.UseItemOnBlockEvent;
-import net.neoforged.neoforge.event.level.*;
+import net.neoforged.neoforge.event.level.BlockDropsEvent;
+import net.neoforged.neoforge.event.level.BlockEvent;
+import net.neoforged.neoforge.event.level.ExplosionEvent;
+import net.neoforged.neoforge.event.level.ExplosionKnockbackEvent;
 import net.neoforged.neoforge.event.village.VillagerTradesEvent;
 import net.neoforged.neoforge.event.village.WandererTradesEvent;
 import net.neoforged.neoforge.network.PacketDistributor;
@@ -55,21 +56,27 @@ public class NeoForgeEvents {
         if(event.getType() == VillagerProfession.FARMER) {
             Int2ObjectMap<List<VillagerTrades.ItemListing>> trades = event.getTrades();
 
-            trades.get(1).add((pTrader, pRandom) -> new MerchantOffer(
+            trades.get(0).add((pTrader, pRandom) -> new MerchantOffer(
                     new ItemCost(ItemRegistry.PEA_POD.get(), pRandom.nextIntBetweenInclusive(12, 17)),
                     new ItemStack(Items.EMERALD, 1),
                     16, 2, 0.02f));
 
-            trades.get(1).add((pTrader, pRandom) -> new MerchantOffer(
+            trades.get(0).add((pTrader, pRandom) -> new MerchantOffer(
                     new ItemCost(ItemRegistry.SUNFLOWER_SEEDS.get(), pRandom.nextIntBetweenInclusive(13, 18)),
                     new ItemStack(Items.EMERALD, 1),
                     16, 2, 0.02f));
 
-            trades.get(1).add((trader, random) -> new MerchantOffer(
+            trades.get(0).add((trader, random) -> new MerchantOffer(
                     new ItemCost(ItemRegistry.WALNUT.get(), random.nextIntBetweenInclusive(8, 11)),
                     new ItemStack(Items.EMERALD, 1),
                     16, 2, 0.02f
             ));
+
+            trades.get(1).add(((trader, random) -> new MerchantOffer(
+                    new ItemCost(Items.EMERALD, 1),
+                    new ItemStack(ItemRegistry.CHERRY_PIE.get(), 4),
+                    12, 5, 0.02f
+            )));
         }
     }
 
