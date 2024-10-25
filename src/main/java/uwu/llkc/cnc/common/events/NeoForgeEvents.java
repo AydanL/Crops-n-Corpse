@@ -56,23 +56,23 @@ public class NeoForgeEvents {
         if(event.getType() == VillagerProfession.FARMER) {
             Int2ObjectMap<List<VillagerTrades.ItemListing>> trades = event.getTrades();
 
-            trades.get(0).add((pTrader, pRandom) -> new MerchantOffer(
+            trades.get(1).add((pTrader, pRandom) -> new MerchantOffer(
                     new ItemCost(ItemRegistry.PEA_POD.get(), pRandom.nextIntBetweenInclusive(12, 17)),
                     new ItemStack(Items.EMERALD, 1),
                     16, 2, 0.02f));
 
-            trades.get(0).add((pTrader, pRandom) -> new MerchantOffer(
+            trades.get(1).add((pTrader, pRandom) -> new MerchantOffer(
                     new ItemCost(ItemRegistry.SUNFLOWER_SEEDS.get(), pRandom.nextIntBetweenInclusive(13, 18)),
                     new ItemStack(Items.EMERALD, 1),
                     16, 2, 0.02f));
 
-            trades.get(0).add((trader, random) -> new MerchantOffer(
+            trades.get(1).add((trader, random) -> new MerchantOffer(
                     new ItemCost(ItemRegistry.WALNUT.get(), random.nextIntBetweenInclusive(8, 11)),
                     new ItemStack(Items.EMERALD, 1),
                     16, 2, 0.02f
             ));
 
-            trades.get(1).add(((trader, random) -> new MerchantOffer(
+            trades.get(2).add(((trader, random) -> new MerchantOffer(
                     new ItemCost(Items.EMERALD, 1),
                     new ItemStack(ItemRegistry.CHERRY_PIE.get(), 4),
                     12, 5, 0.02f

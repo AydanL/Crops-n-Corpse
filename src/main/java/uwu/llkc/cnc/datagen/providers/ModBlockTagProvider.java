@@ -20,8 +20,7 @@ public class ModBlockTagProvider extends BlockTagsProvider {
     @Override
     protected void addTags(HolderLookup.Provider provider) {
         tag(BlockTags.CROPS)
-                .add(BlockRegistry.PEASHOOTER_CROP.get())
-                .add(BlockRegistry.SUNFLOWER_CROP.get());
+                .add(BlockRegistry.PEASHOOTER_CROP.get());
         tag(Tags.Blocks.WALNUT_LOGS)
                 .add(BlockRegistry.STRIPPED_WALNUT_WOOD.get())
                 .add(BlockRegistry.WALNUT_WOOD.get())

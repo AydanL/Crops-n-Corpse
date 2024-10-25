@@ -1,0 +1,16 @@
+{
+  "variants": {
+    "half=lower,has_seeds=false": {
+      "model": "minecraft:block/sunflower_bottom"
+    },
+    "half=lower,has_seeds=true": {
+      "model": "minecraft:block/sunflower_bottom"
+    },
+    "half=upper,has_seeds=false": {
+      "model": "minecraft:block/sunflower_top"
+    },
+    "half=upper,has_seeds=true": {
+      "model": "cnc:block/sunflower_seeded_top"
+    }
+  }
+}

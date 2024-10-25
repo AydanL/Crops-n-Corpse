@@ -3,6 +3,9 @@ package uwu.llkc.cnc.datagen.providers;
 import net.minecraft.core.Direction;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.TallFlowerBlock;
+import net.minecraft.world.level.block.state.properties.DoubleBlockHalf;
 import net.minecraft.world.level.block.state.properties.Property;
 import net.neoforged.neoforge.client.model.generators.BlockModelBuilder;
 import net.neoforged.neoforge.client.model.generators.BlockStateProvider;
@@ -12,9 +15,8 @@ import net.neoforged.neoforge.common.data.ExistingFileHelper;
 import uwu.llkc.cnc.CNCMod;
 import uwu.llkc.cnc.common.blocks.CustomCakeBlock;
 import uwu.llkc.cnc.common.blocks.PlantCropBlock;
+import uwu.llkc.cnc.common.blocks.SunflowerBlock;
 import uwu.llkc.cnc.common.init.BlockRegistry;
-
-import java.util.Comparator;
 
 public class ModBlockStateProvider extends BlockStateProvider {
 
@@ -35,15 +37,20 @@ public class ModBlockStateProvider extends BlockStateProvider {
                 models().crop("pea_crop_stage2", CNCMod.rl("block/pea_crop_stage2")),
                 models().crop("pea_crop_stage3", CNCMod.rl("block/pea_crop_stage3")));
 
-        crop(BlockRegistry.SUNFLOWER_CROP.get(),
-                models().crop("sunflower_crop_stage0", CNCMod.rl("block/sunflower_crop_stage0")),
-                models().crop("sunflower_crop_stage0", CNCMod.rl("block/sunflower_crop_stage0")),
-                models().crop("sunflower_crop_stage1", CNCMod.rl("block/sunflower_crop_stage1")),
-                models().crop("sunflower_crop_stage1", CNCMod.rl("block/sunflower_crop_stage1")),
-                models().crop("sunflower_crop_stage2", CNCMod.rl("block/sunflower_crop_stage2")),
-                models().crop("sunflower_crop_stage2", CNCMod.rl("block/sunflower_crop_stage2")),
-                models().crop("sunflower_crop_stage2", CNCMod.rl("block/sunflower_crop_stage2")),
-                models().crop("sunflower_crop_stage3", CNCMod.rl("block/sunflower_crop_stage3")));
+        getVariantBuilder(Blocks.SUNFLOWER).forAllStates((blockState -> {
+            if (blockState.getValue(TallFlowerBlock.HALF) == DoubleBlockHalf.UPPER) {
+                if (blockState.getValue(SunflowerBlock.HAS_SEEDS)) {
+                    return ConfiguredModel.builder().modelFile(models()
+                            .getExistingFile(CNCMod.rl("block/sunflower_seeded_top"))).build();
+                } else {
+                    return ConfiguredModel.builder().modelFile(models()
+                            .getExistingFile(ResourceLocation.withDefaultNamespace("block/sunflower_top"))).build();
+                }
+            } else {
+                return ConfiguredModel.builder().modelFile(models()
+                        .getExistingFile(ResourceLocation.withDefaultNamespace("block/sunflower_bottom"))).build();
+            }
+        }));
 
         simpleBlock(BlockRegistry.TRAFFIC_CONE.get(), models().getExistingFile(CNCMod.rl("block/traffic_cone")));
         logBlock(BlockRegistry.WALNUT_LOG.get());

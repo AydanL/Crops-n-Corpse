@@ -8,7 +8,6 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockSetType;
-import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.WoodType;
 import net.neoforged.neoforge.registries.DeferredBlock;
 import net.neoforged.neoforge.registries.DeferredRegister;
@@ -22,9 +21,6 @@ public class BlockRegistry {
 
     public static final DeferredBlock<PeashooterCropBlock> PEASHOOTER_CROP = BLOCKS.registerBlock("peashooter_block",
             PeashooterCropBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.WHEAT));
-
-    public static final DeferredBlock<SunflowerCropBlock> SUNFLOWER_CROP = BLOCKS.registerBlock("sunflower_block",
-            SunflowerCropBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.WHEAT));
 
     public static final DeferredBlock<TrafficConeBlock> TRAFFIC_CONE = BLOCKS.registerBlock("traffic_cone",
             TrafficConeBlock::new, BlockBehaviour.Properties.of().instabreak().noOcclusion());

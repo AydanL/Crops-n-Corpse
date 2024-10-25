@@ -1,11 +1,10 @@
-// 1.21	2024-10-24T16:30:44.7676926	Loot Tables
+// 1.21	2024-10-25T23:35:32.5183087	Loot Tables
 d44989f74ec1f8f17ca168d28e8729ae5524c7a8 data/cnc/loot_table/blocks/ceiling_hanging_walnut_sign.json
 026feed868a0d241b4c1c9234c92f033c085d656 data/cnc/loot_table/blocks/chocolate_cherry_cake.json
 b3d76196736929f2ca43d07cc28e41d5554daf31 data/cnc/loot_table/blocks/peashooter_block.json
 df4b125d93e1cd99a9423a2990cc04566ea84ae7 data/cnc/loot_table/blocks/standing_walnut_sign.json
 790bd9b14b9b718ef05bf4482f2e8c253770d332 data/cnc/loot_table/blocks/stripped_walnut_log.json
 4566e1c3725d3c554fc192429c9f849b6d990a81 data/cnc/loot_table/blocks/stripped_walnut_wood.json
-3dccc09cd2e1b66fca80aca9c1afc622d18acedd data/cnc/loot_table/blocks/sunflower_block.json
 52a5538f0254e29c6cfca55169e5ba49748292a3 data/cnc/loot_table/blocks/traffic_cone.json
 2140dba44e061a8c749fac219e598b486befad64 data/cnc/loot_table/blocks/wall_hanging_walnut_sign.json
 37a23c4a4e07b31e11ac9317ea85ad86f22433e9 data/cnc/loot_table/blocks/walnut_button.json

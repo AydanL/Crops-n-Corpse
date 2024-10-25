@@ -39,7 +39,6 @@ public class ModLanguageProvider extends LanguageProvider {
 
         addItem(ItemRegistry.RAW_PEA, toEnglishTranslation(ItemRegistry.RAW_PEA.getId()));
         addItem(ItemRegistry.WALLNUT_SEED_PACKET, "Wall-Nut Seed Packet");
-        addItem(ItemRegistry.SUNFLOWER_SEEDS, toEnglishTranslation(ItemRegistry.SUNFLOWER_SEEDS.getId()));
 
         for (DeferredHolder<Block, ? extends Block> entry : BlockRegistry.BLOCKS.getEntries()) {
             if (entry.get() instanceof SignBlock) continue;
