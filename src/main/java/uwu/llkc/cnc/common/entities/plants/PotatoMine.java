@@ -135,7 +135,7 @@ public class PotatoMine extends CNCPlant {
                 }
                 return super.shouldDamageEntity(explosion, entity);
             }
-        }, getX(), getY(), getZ(), 1.5f, false, Level.ExplosionInteraction.MOB);
+        }, getX(), getY(), getZ(), 1.5f, false, Level.ExplosionInteraction.NONE);
         this.remove(RemovalReason.KILLED);
     }
 
