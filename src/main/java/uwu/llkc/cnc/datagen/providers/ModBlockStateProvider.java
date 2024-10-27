@@ -16,6 +16,7 @@ import uwu.llkc.cnc.CNCMod;
 import uwu.llkc.cnc.common.blocks.CustomCakeBlock;
 import uwu.llkc.cnc.common.blocks.PlantCropBlock;
 import uwu.llkc.cnc.common.blocks.SunflowerBlock;
+import uwu.llkc.cnc.common.blocks.SunflowerCropBlock;
 import uwu.llkc.cnc.common.init.BlockRegistry;
 
 public class ModBlockStateProvider extends BlockStateProvider {
@@ -27,6 +28,42 @@ public class ModBlockStateProvider extends BlockStateProvider {
 
     @Override
     protected void registerStatesAndModels() {
+        getVariantBuilder(BlockRegistry.SUNFLOWER_CROP.get())
+                .forAllStates((blockState -> switch (blockState.getValue(SunflowerCropBlock.AGE)) {
+                    case 0 -> {
+                        if (blockState.getValue(SunflowerCropBlock.HALF) == DoubleBlockHalf.UPPER) {
+                            yield ConfiguredModel.builder().modelFile(models()
+                                    .getExistingFile(ResourceLocation.withDefaultNamespace("air"))).build();
+                        } else {
+                            yield ConfiguredModel.builder().modelFile(models()
+                                    .cross("sunflower_stage0", CNCMod.rl("block/sunflower_stage0"))
+                                    .renderType("cutout")).build();
+                        }
+                    }
+                    case 1 -> {
+                        if (blockState.getValue(SunflowerCropBlock.HALF) == DoubleBlockHalf.UPPER) {
+                            yield ConfiguredModel.builder().modelFile(models()
+                                    .getExistingFile(ResourceLocation.withDefaultNamespace("air"))).build();
+                        } else {
+                            yield ConfiguredModel.builder().modelFile(models()
+                                    .cross("sunflower_stage1", CNCMod.rl("block/sunflower_stage1"))
+                                    .renderType("cutout")).build();
+                        }
+                    }
+                    case 2 -> {
+                        if (blockState.getValue(SunflowerCropBlock.HALF) == DoubleBlockHalf.UPPER) {
+                            yield ConfiguredModel.builder().modelFile(models()
+                                    .cross("sunflower_stage2_top", CNCMod.rl("block/sunflower_stage2_top"))
+                                    .renderType("cutout")).build();
+                        } else {
+                            yield ConfiguredModel.builder().modelFile(models()
+                                    .cross("sunflower_stage2", CNCMod.rl("block/sunflower_stage2"))
+                                    .renderType("cutout")).build();
+                        }
+                    }
+                    default -> ConfiguredModel.builder().build();
+                }));
+
         crop(BlockRegistry.PEASHOOTER_CROP.get(),
                 models().crop("pea_crop_stage0", CNCMod.rl("block/pea_crop_stage0")),
                 models().crop("pea_crop_stage0", CNCMod.rl("block/pea_crop_stage0")),

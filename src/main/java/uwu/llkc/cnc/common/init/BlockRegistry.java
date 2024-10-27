@@ -19,6 +19,9 @@ import uwu.llkc.cnc.common.blocks.*;
 public class BlockRegistry {
     public static final DeferredRegister.Blocks BLOCKS = DeferredRegister.createBlocks(CNCMod.MOD_ID);
 
+    public static final DeferredBlock<SunflowerCropBlock> SUNFLOWER_CROP = BLOCKS.registerBlock("sunflower_crop",
+            SunflowerCropBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.SUNFLOWER));
+
     public static final DeferredBlock<PeashooterCropBlock> PEASHOOTER_CROP = BLOCKS.registerBlock("peashooter_block",
             PeashooterCropBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.WHEAT));
 

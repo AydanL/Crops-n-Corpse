@@ -53,7 +53,8 @@ public class ItemRegistry {
     public static final DeferredItem<BlockItem> RAW_PEA = ITEMS.registerItem("raw_pea",
             props -> new ItemNameBlockItem(BlockRegistry.PEASHOOTER_CROP.get(), props), new Item.Properties().food(Foods.RAW_PEA));
     public static final DeferredItem<Item> COOKED_PEA = ITEMS.registerSimpleItem("cooked_pea", new Item.Properties().food(Foods.COOKED_PEA));
-    public static final DeferredItem<Item> SUNFLOWER_SEEDS = ITEMS.registerSimpleItem("sunflower_seeds", new Item.Properties().food(Foods.SUNFLOWER_SEEDS));
+    public static final DeferredItem<Item> SUNFLOWER_SEEDS = ITEMS.registerItem("sunflower_seeds",
+            props -> new ItemNameBlockItem(BlockRegistry.SUNFLOWER_CROP.get(), props), new Item.Properties().food(Foods.SUNFLOWER_SEEDS));
     public static final DeferredItem<Item> WALNUT = ITEMS.registerSimpleItem("walnut", new Item.Properties().food(Foods.WALNUT));
     public static final DeferredItem<Item> WALNUT_FLOUR = ITEMS.registerSimpleItem("walnut_flour");
     public static final DeferredItem<Item> CHOCOLATE_CHIP_MUFFIN = ITEMS.registerSimpleItem("chocolate_chip_muffin", new Item.Properties().food(Foods.CHOCOLATE_CHIP_MUFFIN));

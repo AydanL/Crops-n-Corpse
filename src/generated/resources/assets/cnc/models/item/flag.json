@@ -11,6 +11,9 @@
     "firstperson_righthand": {
       "parent": "cnc:item/flag_model"
     },
+    "thirdperson_lefthand": {
+      "parent": "cnc:item/flag_model"
+    },
     "thirdperson_righthand": {
       "parent": "cnc:item/flag_model"
     }
