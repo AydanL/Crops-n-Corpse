@@ -57,6 +57,7 @@ import java.util.function.BiConsumer;
 public class CherryBomb extends CNCPlant implements VibrationSystem, IMultiHeadEntity {
     public static final EntityDataAccessor<Boolean> FLYING = SynchedEntityData.defineId(CherryBomb.class, EntityDataSerializers.BOOLEAN);
     public static final EntityDataAccessor<Boolean> SLEEPING = SynchedEntityData.defineId(CherryBomb.class, EntityDataSerializers.BOOLEAN);
+    public static final EntityDataAccessor<Boolean> IGNITED = SynchedEntityData.defineId(CherryBomb.class, EntityDataSerializers.BOOLEAN);
     public static final EntityDataAccessor<Vector3f> LEFT_HEAD_ROT = SynchedEntityData.defineId(CherryBomb.class, EntityDataSerializers.VECTOR3);
     public static final EntityDataAccessor<Vector3f> RIGHT_HEAD_ROT = SynchedEntityData.defineId(CherryBomb.class, EntityDataSerializers.VECTOR3);
     public static final EntityDataAccessor<Vector3f> LEFT_HEAD_ROT_O = SynchedEntityData.defineId(CherryBomb.class, EntityDataSerializers.VECTOR3);
@@ -97,6 +98,7 @@ public class CherryBomb extends CNCPlant implements VibrationSystem, IMultiHeadE
         super.defineSynchedData(builder);
         builder.define(FLYING, false);
         builder.define(SLEEPING, false);
+        builder.define(IGNITED, false);
         builder.define(LEFT_HEAD_ROT, new Vector3f(getXRot(), getYHeadRot(), 0));
         builder.define(RIGHT_HEAD_ROT, new Vector3f(getXRot(), getYHeadRot(), 0));
         builder.define(LEFT_HEAD_ROT_O, new Vector3f(getXRot(), getYHeadRot(), 0));
@@ -174,27 +176,31 @@ public class CherryBomb extends CNCPlant implements VibrationSystem, IMultiHeadE
         }
 
         if (!getEntityData().get(SLEEPING) && !isExploding && !getEntityData().get(FLYING) && !level().isClientSide()) {
-            var player = level().getNearestPlayer(this, 3.5);
-            if (player != null && !player.getUUID().equals(getOwnerUUID())) {
+            if (entityData.get(IGNITED)) {
                 isExploding = true;
             } else {
-                var entity = level().getNearestEntity(Monster.class, TargetingConditions.DEFAULT, this, getX(), getY(), getZ(), AABB.ofSize(position(), 3.5, 3.5, 3.5));
-                if (entity != null) {
+                var player = level().getNearestPlayer(this, 3.5);
+                if (player != null && !player.getUUID().equals(getOwnerUUID())) {
                     isExploding = true;
-                } else if (getOwner() != null) {
-                    var mob = getOwner().getLastHurtMob();
-                    if (mob != null &&
-                            mob.distanceToSqr(this) < 12.25 &&
-                            mob instanceof CNCPlant plant &&
-                            (plant.getOwnerUUID() == null || !plant.getOwnerUUID().equals(getOwnerUUID()))) {
+                } else {
+                    var entity = level().getNearestEntity(Monster.class, TargetingConditions.DEFAULT, this, getX(), getY(), getZ(), AABB.ofSize(position(), 3.5, 3.5, 3.5));
+                    if (entity != null) {
                         isExploding = true;
-                    } else {
-                        mob = getOwner().getLastHurtByMob();
+                    } else if (getOwner() != null) {
+                        var mob = getOwner().getLastHurtMob();
                         if (mob != null &&
                                 mob.distanceToSqr(this) < 12.25 &&
                                 mob instanceof CNCPlant plant &&
                                 (plant.getOwnerUUID() == null || !plant.getOwnerUUID().equals(getOwnerUUID()))) {
                             isExploding = true;
+                        } else {
+                            mob = getOwner().getLastHurtByMob();
+                            if (mob != null &&
+                                    mob.distanceToSqr(this) < 12.25 &&
+                                    mob instanceof CNCPlant plant &&
+                                    (plant.getOwnerUUID() == null || !plant.getOwnerUUID().equals(getOwnerUUID()))) {
+                                isExploding = true;
+                            }
                         }
                     }
                 }
@@ -236,7 +242,7 @@ public class CherryBomb extends CNCPlant implements VibrationSystem, IMultiHeadE
                         this.random.triangle(0.0, 0.0172275 * (double) inaccuracy),
                         this.random.triangle(0.0, 0.0172275 * (double) inaccuracy)
                 )
-                .scale((double) velocity);
+                .scale(velocity);
     }
 
     public void shoot(double x, double y, double z, float velocity, float inaccuracy) {
@@ -254,7 +260,7 @@ public class CherryBomb extends CNCPlant implements VibrationSystem, IMultiHeadE
         float f = -Mth.sin(y * (float) (Math.PI / 180.0)) * Mth.cos(x * (float) (Math.PI / 180.0));
         float f1 = -Mth.sin((x + z) * (float) (Math.PI / 180.0));
         float f2 = Mth.cos(y * (float) (Math.PI / 180.0)) * Mth.cos(x * (float) (Math.PI / 180.0));
-        this.shoot((double) f, (double) f1, (double) f2, velocity, inaccuracy);
+        this.shoot(f, f1, f2, velocity, inaccuracy);
         Vec3 vec3 = shooter.getKnownMovement();
         this.setDeltaMovement(this.getDeltaMovement().add(vec3.x, shooter.onGround() ? 0.0 : vec3.y, vec3.z));
     }

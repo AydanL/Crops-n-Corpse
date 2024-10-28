@@ -75,7 +75,7 @@ public class SeedPacketItem<T extends Entity> extends Item {
         return new ItemStack(SEED_PACKET_ITEM_MAP.get().get(entityType));
     }
 
-    private <F extends Entity> Consumer<F> getConsumer(ServerLevel level, ItemStack stack, Player player) {
+    protected <F extends Entity> Consumer<F> getConsumer(ServerLevel level, ItemStack stack, Player player, InteractionHand hand) {
         return EntityType.<F>createDefaultStackConfig(level, stack, player).andThen(mob -> {
             mob.setYRot(player.getYHeadRot());
             mob.setYHeadRot(player.getYHeadRot());
@@ -90,7 +90,7 @@ public class SeedPacketItem<T extends Entity> extends Item {
             if (!data.isEmpty() || fallbackEntityType != null) {
                 EntityType<?> entity = data.isEmpty() ? getFallbackEntityType() : data.read(ENTITY_TYPE_FIELD_CODEC).result().orElse(getFallbackEntityType());
                 if (context.getPlayer() != null && (context.getPlayer().hasInfiniteMaterials() || ItemUtils.tryTakeItems(context.getPlayer(), new ItemStack(ItemRegistry.SUN.get(), getSunCost())))) {
-                    entity.spawn((ServerLevel) context.getLevel(), getConsumer(((ServerLevel) context.getLevel()), context.getItemInHand(), context.getPlayer()), context.getClickedPos(), MobSpawnType.SPAWN_EGG, true, true);
+                    entity.spawn((ServerLevel) context.getLevel(), getConsumer(((ServerLevel) context.getLevel()), context.getItemInHand(), context.getPlayer(), context.getHand()), context.getClickedPos(), MobSpawnType.SPAWN_EGG, true, true);
                     if (context.getPlayer() != null && !context.getPlayer().hasInfiniteMaterials()) {
                         context.getPlayer().setItemInHand(context.getHand(), new ItemStack(ItemRegistry.EMPTY_SEED_PACKET.get(), 1));
                         if (context.getPlayer().level().getGameRules().getBoolean(GameRuleInit.RULE_SEED_PACKET_COOLDOWN)) {
@@ -117,7 +117,7 @@ public class SeedPacketItem<T extends Entity> extends Item {
             if (!data.isEmpty() || fallbackEntityType != null) {
                 EntityType<?> entity = data.isEmpty() ? getFallbackEntityType() : data.read(ENTITY_TYPE_FIELD_CODEC).result().orElse(getFallbackEntityType());
                 if (entity != null && (player.hasInfiniteMaterials() || ItemUtils.tryTakeItems(player, new ItemStack(ItemRegistry.SUN.get(), getSunCost())))) {
-                    var cherryEntity = entity.create((ServerLevel) level, getConsumer((ServerLevel) level, player.getItemInHand(usedHand), player), player.blockPosition(), MobSpawnType.SPAWN_EGG, true, true);
+                    var cherryEntity = entity.create((ServerLevel) level, getConsumer((ServerLevel) level, player.getItemInHand(usedHand), player, usedHand), player.blockPosition(), MobSpawnType.SPAWN_EGG, true, true);
                     if (cherryEntity instanceof CherryBomb cherry) {
                         cherry.getEntityData().set(CherryBomb.FLYING, true);
                         cherry.setPos(player.position());

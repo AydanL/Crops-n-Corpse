@@ -2,6 +2,7 @@ package uwu.llkc.cnc.common.init;
 
 import com.mojang.datafixers.util.Pair;
 import net.minecraft.Util;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
@@ -9,6 +10,7 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.Mob;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.vehicle.Boat;
 import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.item.*;
@@ -30,7 +32,22 @@ public class ItemRegistry {
     public static final DeferredItem<SeedPacketItem<Sunflower>> SUNFLOWER_SEED_PACKET = ITEMS.registerItem("sunflower_seed_packet", props -> new SeedPacketItem<>(props.stacksTo(1), 0, 200, EntityTypeRegistry.SUNFLOWER, false));
     public static final DeferredItem<SeedPacketItem<WallNut>> WALLNUT_SEED_PACKET = ITEMS.registerItem("wallnut_seed_packet", props -> new SeedPacketItem<>(props.stacksTo(1), 8, 320, EntityTypeRegistry.WALLNUT, false));
     public static final DeferredItem<SeedPacketItem<PotatoMine>> POTATO_MINE_SEED_PACKET = ITEMS.registerItem("potato_mine_seed_packet", props -> new SeedPacketItem<>(props.stacksTo(1), 4, 320, EntityTypeRegistry.POTATO_MINE, false));
-    public static final DeferredItem<SeedPacketItem<CherryBomb>> CHERRY_BOMB_SEED_PACKET = ITEMS.registerItem("cherry_bomb_seed_packet", props -> new SeedPacketItem<>(props.stacksTo(1), 24, 900, EntityTypeRegistry.CHERRY_BOMB, true));
+    public static final DeferredItem<SeedPacketItem<CherryBomb>> CHERRY_BOMB_SEED_PACKET = ITEMS.registerItem("cherry_bomb_seed_packet", props -> new SeedPacketItem<>(props.stacksTo(1), 24, 900, EntityTypeRegistry.CHERRY_BOMB, true) {
+        @Override
+        protected <F extends Entity> Consumer<F> getConsumer(ServerLevel level, ItemStack stack, Player player, InteractionHand hand) {
+            return super.<F>getConsumer(level, stack, player, hand).andThen(entity -> {
+                if (hand == InteractionHand.MAIN_HAND) {
+                    if (player.getItemInHand(InteractionHand.OFF_HAND).is(Items.FLINT_AND_STEEL)) {
+                        entity.getEntityData().set(CherryBomb.IGNITED, true);
+                    }
+                } else {
+                    if (player.getItemInHand(InteractionHand.MAIN_HAND).is(Items.FLINT_AND_STEEL)) {
+                        entity.getEntityData().set(CherryBomb.IGNITED, true);
+                    }
+                }
+            });
+        }
+    });
     public static final DeferredItem<SeedPacketItem<Entity>> EMPTY_SEED_PACKET = ITEMS.registerItem("empty_seed_packet", props -> new SeedPacketItem<>(props, 0, 0, null, false));
 
     public static final DeferredItem<Item> PLANT_FOOD = ITEMS.registerSimpleItem("plant_food");
