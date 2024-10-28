@@ -4,7 +4,6 @@ import net.minecraft.core.RegistrySetBuilder;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.PackOutput;
-import net.minecraft.data.info.ItemListReport;
 import net.minecraft.data.loot.LootTableProvider;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParamSets;
 import net.neoforged.bus.api.SubscribeEvent;
@@ -61,6 +60,5 @@ public class DatagenHandler {
                                 ModLootTableSubProvider::new, LootContextParamSets.ALL_PARAMS
                         )), provider));
         generator.addProvider(event.includeServer(), new ModGlobalLootModifierProvider(output, provider));
-        generator.addProvider(event.includeReports(), new ItemListReport(output, event.getLookupProvider()));
     }
 }
