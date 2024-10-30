@@ -13,10 +13,7 @@ import net.neoforged.neoforge.common.data.ExistingFileHelper;
 import net.neoforged.neoforge.data.event.GatherDataEvent;
 import net.neoforged.neoforge.registries.NeoForgeRegistries;
 import uwu.llkc.cnc.CNCMod;
-import uwu.llkc.cnc.common.init.BiomeModifierInit;
-import uwu.llkc.cnc.common.init.ConfiguredFeatureInit;
-import uwu.llkc.cnc.common.init.DamageTypeInit;
-import uwu.llkc.cnc.common.init.PlacedFeatureInit;
+import uwu.llkc.cnc.common.init.*;
 import uwu.llkc.cnc.datagen.providers.*;
 
 import java.util.List;
@@ -28,7 +25,10 @@ public class DatagenHandler {
             .add(Registries.DAMAGE_TYPE, DamageTypeInit::bootstrap)
             .add(Registries.CONFIGURED_FEATURE, ConfiguredFeatureInit::bootstrap)
             .add(Registries.PLACED_FEATURE, PlacedFeatureInit::bootstrap)
-            .add(NeoForgeRegistries.Keys.BIOME_MODIFIERS, BiomeModifierInit::bootstrap);
+            .add(NeoForgeRegistries.Keys.BIOME_MODIFIERS, BiomeModifierInit::bootstrap)
+            .add(Registries.STRUCTURE, StructureInit::bootstrap)
+            .add(Registries.STRUCTURE_SET, StructureSetInit::bootstrap)
+            .add(Registries.TEMPLATE_POOL, StructureTemplatePoolInit::bootstrap);
 
     @SubscribeEvent
     public static void gatherData(final GatherDataEvent event) {

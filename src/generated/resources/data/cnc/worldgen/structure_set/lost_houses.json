@@ -1,0 +1,22 @@
+{
+  "placement": {
+    "type": "minecraft:random_spread",
+    "salt": 12938764,
+    "separation": 8,
+    "spacing": 34
+  },
+  "structures": [
+    {
+      "structure": "cnc:house_grill",
+      "weight": 1
+    },
+    {
+      "structure": "cnc:house_mailbox",
+      "weight": 1
+    },
+    {
+      "structure": "cnc:house_pool",
+      "weight": 1
+    }
+  ]
+}
