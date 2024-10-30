@@ -98,6 +98,11 @@ public class NeoForgeEvents {
                 new ItemCost(Items.EMERALD, 12),
                 new ItemStack(ItemRegistry.EMPTY_SEED_PACKET.get(), 1),
                 2, 2, 0.1f));
+
+        genericTrades.add((pTrader, pRandom) -> new MerchantOffer(
+                new ItemCost(Items.EMERALD, 3),
+                new ItemStack(ItemRegistry.PLANT_FOOD.get(), 1),
+                12, 2, 0.1f));
     }
 
     @SubscribeEvent
