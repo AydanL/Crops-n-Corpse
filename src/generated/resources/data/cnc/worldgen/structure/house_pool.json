@@ -10,5 +10,6 @@
   },
   "start_pool": "cnc:house_pool",
   "step": "surface_structures",
+  "terrain_adaptation": "beard_thin",
   "use_expansion_hack": false
 }

@@ -136,7 +136,7 @@ public class SeedPacketItem<T extends Entity> extends Item {
                         return InteractionResultHolder.fail(player.getItemInHand(usedHand));
                     }
                 }
-                player.displayClientMessage(Component.translatableWithFallback("item.seed_packet.sun", "Insufficient Sun").withStyle(ChatFormatting.RED), true);
+                player.displayClientMessage(Component.translatable("item.seed_packet.insufficient_sun").withStyle(ChatFormatting.RED), true);
                 ((ServerPlayer) player).connection.send(new ClientboundSoundPacket(SoundEvents.NOTE_BLOCK_DIDGERIDOO, SoundSource.PLAYERS, player.getX(), player.getY(), player.getZ(), 1, 0, player.getRandom().nextLong()));
                 return InteractionResultHolder.fail(player.getItemInHand(usedHand));
             }
@@ -151,27 +151,27 @@ public class SeedPacketItem<T extends Entity> extends Item {
 
         if (entity != null) {
 
-            tooltipComponents.add(Component.translatableWithFallback("item.cnc.seed_packet.cost", "Sun Cost:").withStyle(ChatFormatting.BLUE));
+            tooltipComponents.add(Component.translatable("item.cnc.seed_packet.cost").withStyle(ChatFormatting.BLUE));
 
-            tooltipComponents.add(Component.literal(getSunCost() + " Sun").withStyle(ChatFormatting.GRAY));
+            tooltipComponents.add(Component.literal(getSunCost() + " ").append(Component.translatable("item.cnc.sun")).withStyle(ChatFormatting.GRAY));
 
-            tooltipComponents.add(Component.translatableWithFallback("item.cnc.seed_packet.cooldown", "Cooldown:").withStyle(ChatFormatting.BLUE));
+            tooltipComponents.add(Component.translatable("item.cnc.seed_packet.cooldown").withStyle(ChatFormatting.BLUE));
 
-            tooltipComponents.add(Component.literal(getCooldown() / 20f + " Seconds").withStyle(ChatFormatting.GRAY));
+            tooltipComponents.add(Component.literal(getCooldown() / 20f + " ").append(Component.translatable("item.cnc.seed_packet.seconds")).withStyle(ChatFormatting.GRAY));
 
 
-            tooltipComponents.add(Component.translatableWithFallback("item.cnc.seed_packet.hp", "Remaining Health:").withStyle(ChatFormatting.BLUE));
+            tooltipComponents.add(Component.translatable("item.cnc.seed_packet.hp").withStyle(ChatFormatting.BLUE));
             var maxHealth = DefaultAttributes.getSupplier((EntityType<? extends LivingEntity>) entity).getValue(Attributes.MAX_HEALTH);
             data.read(HEALTH_FIELD_CODEC).result().ifPresentOrElse(hp -> {
                 tooltipComponents.add(Component.literal(Math.round(hp / maxHealth * 100) + "%").withStyle(ChatFormatting.GRAY));
             }, () -> tooltipComponents.add(Component.literal("100%").withStyle(ChatFormatting.GRAY)));
 
-            tooltipComponents.add(Component.translatableWithFallback("item.cnc.seed_packet.owner", "Owner:").withStyle(ChatFormatting.BLUE));
+            tooltipComponents.add(Component.translatable("item.cnc.seed_packet.owner").withStyle(ChatFormatting.BLUE));
 
             data.read(UUID_FIELD_CODEC).result().ifPresentOrElse(uuid -> {
                 tooltipComponents.add(Component.literal(Minecraft.getInstance().level.getPlayerByUUID(uuid).getName().getString()).withStyle(ChatFormatting.GRAY));
             }, () -> {
-                tooltipComponents.add(Component.literal("NONE").withStyle(ChatFormatting.GRAY));
+                tooltipComponents.add(Component.translatable("item.cnc.seed_packet.none").withStyle(ChatFormatting.GRAY));
             });
         }
     }

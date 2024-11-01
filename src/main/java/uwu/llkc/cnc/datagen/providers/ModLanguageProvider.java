@@ -77,6 +77,13 @@ public class ModLanguageProvider extends LanguageProvider {
         add("death.attack.cnc_zombie", "%1$s ate %2$s's brainz");
 
         add("item.multi_spawn_egg.tooltip", "Shift right-click to cycle");
+        add("item.cnc.seed_packet.cost", "Sun Cost:");
+        add("item.cnc.seed_packet.cooldown", "Cooldown:");
+        add("item.cnc.seed_packet.hp", "Remaining Health:");
+        add("item.cnc.seed_packet.owner", "Owner:");
+        add("item.cnc.seed_packet.none", "None");
+        add("item.cnc.seed_packet.seconds", "Seconds");
+        add("item.cnc.seed_packet.insufficient_sun", "Insufficient Sun");
     }
 
     private String toEnglishTranslation(ResourceLocation rl) {

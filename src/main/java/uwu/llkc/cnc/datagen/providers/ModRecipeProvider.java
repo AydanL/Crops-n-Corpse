@@ -36,7 +36,7 @@ public class ModRecipeProvider extends RecipeProvider {
                 .unlockedBy("has_pea", has(ItemRegistry.PEA_POD.get()))
                 .save(recipeOutput, "seed_packet_peashooter");
 
-        ShapedRecipeBuilder.shaped(RecipeCategory.COMBAT, SeedPacketItem.getSeedPacket(EntityTypeRegistry.PEASHOOTER.get()))
+        ShapedRecipeBuilder.shaped(RecipeCategory.COMBAT, SeedPacketItem.getSeedPacket(EntityTypeRegistry.CHERRY_BOMB.get()))
                 .pattern(" c ")
                 .pattern("sef")
                 .pattern(" c ")
